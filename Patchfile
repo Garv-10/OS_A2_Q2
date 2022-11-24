@@ -1,0 +1,27 @@
+Only in linux-5.19.9_new: 2d_copy_syscall
+diff -ru linux-5.19.9_old/Makefile linux-5.19.9_new/Makefile
+--- linux-5.19.9_old/Makefile	2022-09-15 14:17:20.000000000 +0530
++++ linux-5.19.9_new/Makefile	2022-11-24 18:33:33.900003541 +0530
+@@ -1100,7 +1100,7 @@
+ export MODULES_NSDEPS := $(extmod_prefix)modules.nsdeps
+ 
+ ifeq ($(KBUILD_EXTMOD),)
+-core-y			+= kernel/ certs/ mm/ fs/ ipc/ security/ crypto/
++core-y			+= kernel/ certs/ mm/ fs/ ipc/ security/ crypto/ hello_syscall/ 2d_copy_syscall
+ core-$(CONFIG_BLOCK)	+= block/
+ core-$(CONFIG_IO_URING)	+= io_uring/
+ 
+diff -ru linux-5.19.9_old/arch/x86/entry/syscalls/syscall_64.tbl linux-5.19.9_new/arch/x86/entry/syscalls/syscall_64.tbl
+--- linux-5.19.9_old/arch/x86/entry/syscalls/syscall_64.tbl	2022-09-15 14:17:20.000000000 +0530
++++ linux-5.19.9_new/arch/x86/entry/syscalls/syscall_64.tbl	2022-11-24 18:15:25.840001721 +0530
+@@ -372,7 +372,8 @@
+ 448	common	process_mrelease	sys_process_mrelease
+ 449	common	futex_waitv		sys_futex_waitv
+ 450	common	set_mempolicy_home_node	sys_set_mempolicy_home_node
+-
++451	common  hwllo_system_call	sys_hello
++452	common  2d_copy_system_call	sys_kernel_2d_memcpy
+ #
+ # Due to a historical design error, certain syscalls are numbered differently
+ # in x32 as compared to native x86_64.  These syscalls have numbers 512-547.
+Only in linux-5.19.9_new: hello_syscall
